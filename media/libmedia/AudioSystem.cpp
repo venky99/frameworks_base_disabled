@@ -938,6 +938,12 @@ extern "C" bool _ZN7android11AudioSystem17isSeparatedStreamE19audio_stream_type_
     LOGD("isSeparatedStream: false");
     return false;
 }
+
+extern "C" bool _ZN7android11AudioSystem10stopOutputEiNS0_11stream_typeEi(audio_io_handle_t output, audio_stream_type_t stream, int session)
+{
+    return AudioSystem::stopOutput(output, stream, session);
+}
+
 #endif // USE_SAMSUNG_SEPARATEDSTREAM
 
 }; // namespace android

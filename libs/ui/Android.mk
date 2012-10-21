@@ -21,7 +21,8 @@ commonSources:= \
 	Keyboard.cpp \
 	KeyLayoutMap.cpp \
 	KeyCharacterMap.cpp \
-	VirtualKeyMap.cpp
+	VirtualKeyMap.cpp \
+        Overlay.cpp
 
 # For the host
 # =====================================================

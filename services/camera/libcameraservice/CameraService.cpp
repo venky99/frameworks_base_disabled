@@ -1118,7 +1118,9 @@ void CameraService::Client::handleShutter(void) {
         c->notifyCallback(CAMERA_MSG_SHUTTER, 0, 0);
         if (!lockIfMessageWanted(CAMERA_MSG_SHUTTER)) return;
     }
+#ifndef SAMSUNG_CAMERA_QCOM
     disableMsgType(CAMERA_MSG_SHUTTER);
+#endif
 
     mLock.unlock();
 }
