@@ -1229,8 +1229,17 @@ public class PhoneStatusBar extends StatusBar {
         }
 
         mClearButton.setVisibility(clearable ? View.VISIBLE : View.GONE);
+<<<<<<< HEAD
         mSettingsButton.setLayoutParams(clearable ? mSettingswClearParams : mSettingswoClearParams);
+=======
+>>>>>>> c134555... Recent apps: Clear all recent apps at once
         mClearButton.setEnabled(clearable);
+
+        if (DEBUG) {
+            String visibility = (mClearButton.getVisibility() == View.GONE) ?
+                                    "GONE" : "VISIBLE";
+            Slog.d(TAG, "Clear all visibility = " + visibility);
+        }
 
         /*
          * if (mNoNotificationsTitle.isShown()) { if (any !=
