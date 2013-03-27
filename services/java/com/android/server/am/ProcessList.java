@@ -122,16 +122,47 @@ class ProcessList {
     // These are the various interesting memory levels that we will give to
     // the OOM killer.  Note that the OOM killer only supports 6 slots, so we
     // can't give it a different value for every possible kind of process.
-    private final int[] mOomAdj = new int[] {
+    static final int[] mOomAdj = new int[] {
             FOREGROUND_APP_ADJ, VISIBLE_APP_ADJ, PERCEPTIBLE_APP_ADJ,
             BACKUP_APP_ADJ, HIDDEN_APP_MIN_ADJ, HIDDEN_APP_MAX_ADJ
     };
     // These are the low-end OOM level limits.  This is appropriate for an
     // HVGA or smaller phone with less than 512MB.  Values are in KB.
-    private final long[] mOomMinFreeLow = new long[] {
+    static final long[] mOomMinFreeLow = new long[] {
             8192, 12288, 16384,
             24576, 28672, 32768
     };
+
+    static {
+		int memAdj = 0;
+		int memMem = 0;
+
+		memAdj = SystemProperties.getInt("sys.mem.FOREGROUND_APP_ADJ",0);
+		if (memAdj > 0) mOomAdj[0] = memAdj;
+		memAdj = SystemProperties.getInt("sys.mem.VISIBLE_APP_ADJ",0);
+		if (memAdj > 0) mOomAdj[1] = memAdj;
+		memAdj = SystemProperties.getInt("sys.mem.PERCEPTIBLE_APP_ADJ",0);
+		if (memAdj > 0) mOomAdj[2] = memAdj;
+		memAdj = SystemProperties.getInt("sys.mem.BACKUP_APP_ADJ",0);
+		if (memAdj > 0) mOomAdj[3] = memAdj;
+		memAdj = SystemProperties.getInt("sys.mem.HIDDEN_APP_MIN_ADJ",0);
+		if (memAdj > 0) mOomAdj[4] = memAdj;
+		memAdj = SystemProperties.getInt("sys.mem.HIDDEN_APP_MAX_ADJ",0);
+		if (memAdj > 0) mOomAdj[5] = memAdj;
+
+		memMem = SystemProperties.getInt("sys.mem.FOREGROUND_APP_MEM",0);
+		if (memMem > 0) mOomMinFreeLow[0] = memMem;
+		memMem = SystemProperties.getInt("sys.mem.VISIBLE_APP_MEM",0);
+		if (memMem > 0) mOomMinFreeLow[1] = memMem;
+		memMem = SystemProperties.getInt("sys.mem.PERCEPTIBLE_APP_MEM",0);
+		if (memMem > 0) mOomMinFreeLow[2] = memMem;
+		memMem = SystemProperties.getInt("sys.mem.BACKUP_APP_MEM",0);
+		if (memMem > 0) mOomMinFreeLow[3] = memMem;
+		memMem = SystemProperties.getInt("sys.mem.HIDDEN_APP_MIN_MEM",0);
+		if (memMem > 0) mOomMinFreeLow[4] = memMem;
+		memMem = SystemProperties.getInt("sys.mem.HIDDEN_APP_MAX_MEM",0);
+		if (memMem > 0) mOomMinFreeLow[5] = memMem;
+	}
     // These are the high-end OOM level limits.  This is appropriate for a
     // 1280x800 or larger screen with around 1GB RAM.  Values are in KB.
     private final long[] mOomMinFreeHigh = new long[] {
