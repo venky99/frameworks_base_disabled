@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (C) 2007 The Android Open Source Project
-=======
  * Copyright (C) 2012 The Android Open Source Project
->>>>>>> 837cfa0... add overlay and some changes for camerahal
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -18,38 +14,20 @@
  * limitations under the License.
  */
 
-<<<<<<< HEAD
-=======
 
 //#define LOG_NDEBUG 0
->>>>>>> 837cfa0... add overlay and some changes for camerahal
 #define LOG_TAG "Overlay"
 
 #include <binder/IMemory.h>
 #include <binder/Parcel.h>
 #include <utils/Errors.h>
 #include <binder/MemoryHeapBase.h>
-<<<<<<< HEAD
-=======
 #include <cutils/ashmem.h>
->>>>>>> 837cfa0... add overlay and some changes for camerahal
 
 #include <ui/Overlay.h>
 
 namespace android {
 
-<<<<<<< HEAD
-Overlay::Overlay(overlay_set_fd_hook set_fd,
-        overlay_set_crop_hook set_crop,
-        overlay_queue_buffer_hook queue_buffer,
-        void *data)
-    : mStatus(NO_INIT)
-{
-    set_fd_hook = set_fd;
-    set_crop_hook = set_crop;
-    queue_buffer_hook = queue_buffer;
-    hook_data = data;
-=======
 int Overlay::getBppFromFormat(const Format format)
 {
     switch(format) {
@@ -133,24 +111,12 @@ Overlay::Overlay(uint32_t width, uint32_t height, Format format, QueueBufferHook
 
     LOGD("%s: Init overlay complete", __FUNCTION__);
 
->>>>>>> 837cfa0... add overlay and some changes for camerahal
     mStatus = NO_ERROR;
 }
 
 Overlay::~Overlay() {
 }
 
-<<<<<<< HEAD
-status_t Overlay::dequeueBuffer(void** buffer)
-{
-    return mStatus;
-}
-
-status_t Overlay::queueBuffer(void* buffer)
-{
-    if (queue_buffer_hook)
-        queue_buffer_hook(hook_data, buffer);
-=======
 status_t Overlay::dequeueBuffer(overlay_buffer_t* buffer)
 {
     LOGV("%s", __FUNCTION__);
@@ -215,104 +181,41 @@ status_t Overlay::queueBuffer(overlay_buffer_t buffer)
 
     pthread_mutex_unlock(&mQueueMutex);
 
->>>>>>> 837cfa0... add overlay and some changes for camerahal
     return mStatus;
 }
 
 status_t Overlay::resizeInput(uint32_t width, uint32_t height)
 {
-<<<<<<< HEAD
-=======
     LOGW("%s: %d, %d", __FUNCTION__, width, height);
->>>>>>> 837cfa0... add overlay and some changes for camerahal
     return mStatus;
 }
 
 status_t Overlay::setParameter(int param, int value)
 {
-<<<<<<< HEAD
-=======
     LOGW("%s: %d, %d", __FUNCTION__, param, value);
->>>>>>> 837cfa0... add overlay and some changes for camerahal
     return mStatus;
 }
 
 status_t Overlay::setCrop(uint32_t x, uint32_t y, uint32_t w, uint32_t h)
 {
-<<<<<<< HEAD
-    if (set_crop_hook)
-        set_crop_hook(hook_data, x, y, w, h);
-=======
     LOGD("%s: x=%d, y=%d, w=%d, h=%d", __FUNCTION__, x, y, w, h);
->>>>>>> 837cfa0... add overlay and some changes for camerahal
     return mStatus;
 }
 
 status_t Overlay::getCrop(uint32_t* x, uint32_t* y, uint32_t* w, uint32_t* h)
 {
-<<<<<<< HEAD
-=======
     LOGW("%s", __FUNCTION__);
->>>>>>> 837cfa0... add overlay and some changes for camerahal
     return mStatus;
 }
 
 status_t Overlay::setFd(int fd)
 {
-<<<<<<< HEAD
-    if (set_fd_hook)
-        set_fd_hook(hook_data, fd);
-=======
     LOGW("%s: fd=%d", __FUNCTION__, fd);
->>>>>>> 837cfa0... add overlay and some changes for camerahal
     return mStatus;
 }
 
 int32_t Overlay::getBufferCount() const
 {
-<<<<<<< HEAD
-    return 0;
-}
-
-void* Overlay::getBufferAddress(void* buffer)
-{
-    return 0;
-}
-
-void Overlay::destroy() {  
-}
-
-status_t Overlay::getStatus() const {
-    return mStatus;
-}
-
-void* Overlay::getHandleRef() const {
-    return 0;
-}
-
-uint32_t Overlay::getWidth() const {
-    return 0;
-}
-
-uint32_t Overlay::getHeight() const {
-    return 0;
-}
-
-int32_t Overlay::getFormat() const {
-    return 0;
-}
-
-int32_t Overlay::getWidthStride() const {
-    return 0;
-}
-
-int32_t Overlay::getHeightStride() const {
-    return 0;
-}
-
-// ----------------------------------------------------------------------------
-
-=======
     LOGV("%s: %d", __FUNCTION__, NUM_BUFFERS);
     return NUM_BUFFERS;
 }
@@ -395,5 +298,4 @@ int32_t Overlay::getHeightStride() const
     return mHeight;
 }
 
->>>>>>> 837cfa0... add overlay and some changes for camerahal
 }; // namespace android

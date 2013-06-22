@@ -1,9 +1,5 @@
 /*
-<<<<<<< HEAD
- * Copyright (C) 2007 The Android Open Source Project
-=======
  * Copyright (C) 2012 The Android Open Source Project
->>>>>>> 837cfa0... add overlay and some changes for camerahal
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,24 +24,6 @@
 #include <binder/IInterface.h>
 #include <utils/RefBase.h>
 #include <utils/threads.h>
-<<<<<<< HEAD
-
-#include <ui/PixelFormat.h>
-
-typedef void (*overlay_set_fd_hook)(void *data,
-        int fd);
-typedef void (*overlay_set_crop_hook)(void *data,
-        uint32_t x, uint32_t y, uint32_t w, uint32_t h);
-typedef void (*overlay_queue_buffer_hook)(void *data,
-        void* buffer);
-
-namespace android {
-
-class IMemory;
-class IMemoryHeap;
-
-// ----------------------------------------------------------------------------
-=======
 #include <hardware/gralloc.h>
 
 #include <ui/PixelFormat.h>
@@ -54,29 +32,10 @@ namespace android {
 
 typedef void* overlay_buffer_t;
 typedef uint32_t overlay_handle_t;
->>>>>>> 837cfa0... add overlay and some changes for camerahal
 
 class Overlay : public virtual RefBase
 {
 public:
-<<<<<<< HEAD
-    Overlay(overlay_set_fd_hook set_fd,
-            overlay_set_crop_hook set_crop,
-            overlay_queue_buffer_hook queue_buffer,
-            void* data);
-
-    /* destroys this overlay */
-    void destroy();
-    
-    /* get the HAL handle for this overlay */
-    void* getHandleRef() const;
-
-    /* blocks until an overlay buffer is available and return that buffer. */
-    status_t dequeueBuffer(void** buffer);
-
-    /* release the overlay buffer and post it */
-    status_t queueBuffer(void* buffer);
-=======
     typedef void (*QueueBufferHook)(void *data, void* buffer, size_t size);
 
     enum Format {
@@ -103,7 +62,6 @@ public:
 
     /* release the overlay buffer and post it */
     status_t queueBuffer(overlay_buffer_t buffer);
->>>>>>> 837cfa0... add overlay and some changes for camerahal
 
     /* change the width and height of the overlay */
     status_t resizeInput(uint32_t width, uint32_t height);
@@ -117,11 +75,7 @@ public:
     status_t setFd(int fd);
 
     /* returns the address of a given buffer if supported, NULL otherwise. */
-<<<<<<< HEAD
-    void* getBufferAddress(void* buffer);
-=======
     void* getBufferAddress(overlay_buffer_t buffer);
->>>>>>> 837cfa0... add overlay and some changes for camerahal
 
     /* get physical informations about the overlay */
     uint32_t getWidth() const;
@@ -131,27 +85,15 @@ public:
     int32_t getHeightStride() const;
     int32_t getBufferCount() const;
     status_t getStatus() const;
-<<<<<<< HEAD
-    
-=======
 
 public:
     static int getBppFromFormat(Format format);
     static Format getFormatFromString(const char* name);
 
->>>>>>> 837cfa0... add overlay and some changes for camerahal
 private:
     virtual ~Overlay();
 
     // C style hook
-<<<<<<< HEAD
-    overlay_set_fd_hook set_fd_hook;
-    overlay_set_crop_hook set_crop_hook;
-    overlay_queue_buffer_hook queue_buffer_hook;
-    void* hook_data;
-
-    status_t mStatus;
-=======
     QueueBufferHook mQueueBufferHook;
     void* mHookData;
 
@@ -177,7 +119,6 @@ private:
 
     // queue/dequeue mutex
     pthread_mutex_t mQueueMutex;
->>>>>>> 837cfa0... add overlay and some changes for camerahal
 };
 
 // ----------------------------------------------------------------------------
