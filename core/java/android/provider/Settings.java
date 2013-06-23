@@ -2091,6 +2091,27 @@ public final class Settings {
          * @hide
          */
         public static final String EXPANDED_HIDE_INDICATOR = "expanded_hide_indicator";
+
+         /**
+         * Whether to control brightness from status bar
+         *
+         * @hide
+         */
+        public static final String STATUS_BAR_BRIGHTNESS_CONTROL = "status_bar_brightness_control";
+
+        /**
+         * Whether to show the IME switcher in the status bar
+         * @hide
+         */
+        public static final String STATUS_BAR_IME_SWITCHER = "status_bar_ime_switcher";
+
+        /**
+         * Whether to place the status bar at the bottom of the screen
+         * @hide
+         */
+
+        public static final String STATUS_BAR_BOTTOM = "status_bar_bottom";
+
         /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
