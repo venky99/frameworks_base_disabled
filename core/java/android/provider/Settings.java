@@ -2086,13 +2086,6 @@ public final class Settings {
         public static final String WIDGET_BUTTONS = "expanded_widget_buttons";
 
         /**
-         * Notification Indicator Color
-         *
-         * @hide
-         */
-        public static final String EXPANDED_VIEW_WIDGET_COLOR = "expanded_widget_color";
-
-        /**
          * Hide indicator in status bar widget
          *
          * @hide
